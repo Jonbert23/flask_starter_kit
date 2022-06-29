@@ -1,0 +1,80 @@
+{% extends "layouts/layouts.html" %}
+
+
+{% block bodyTitle %}
+Dashboard
+{% endblock %}
+
+{% block body %}
+<h1 class="title">
+  Welcome, {{ name }}!
+</h1>
+
+<form action="{{ url_for('app.figuresMatching') }}" method="POST">
+  <ol class="breadcrumb mb-12">
+    <li class="breadcrumb-item active">Please select atleast one modules! </li>
+  </ol>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="financials" value="Financials" name="modules[]">
+    <label class="form-check-label" for="financials">
+      Financials
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="operations" value="Operations" name="modules[]">
+    <label class="form-check-label" for="operations">
+      Operations
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="dashboard" value="Dashboard" name="modules[]">
+    <label class="form-check-label" for="dashboard">
+      Dashboard
+    </label>
+  </div>
+  <br>
+  <ol class="breadcrumb mb-12">
+    <li class="breadcrumb-item active">Please select atleast one metrics!</li>
+  </ol>
+  
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="netprod" value="Net Production" name="metrics[]">
+    <label class="form-check-label" for="netprod">
+      Net Production
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="grossprod" value="Gross Production" name="metrics[]">
+    <label class="form-check-label" for="grossprod">
+      Gross Production
+    </label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" id="adjustment" value="Adjustment" name="metrics[]" >
+    <label class="form-check-label" for="flexCheckChecked">
+      Adjustment
+    </label>
+  </div>
+  <br>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% if allData is defined and allData|length %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Module Name</th>
+      <!-- <th scope="col">Metric</th>
+      <th scope="col">Pass/Fail</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    {% for data in allData %}
+    <tr>
+      <td>{{data|safe}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}
