@@ -53,7 +53,6 @@ def signup_post():
             db.session.add(new_user)
             db.session.commit()
             flash('Successfully register the user', 'success')
-        
          
     return redirect('/')
 
