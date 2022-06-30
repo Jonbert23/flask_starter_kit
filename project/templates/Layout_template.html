@@ -14,6 +14,9 @@
     <link href="{{ url_for('static', filename='css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ url_for('static', filename='css/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
 
+    <!--SweetAlert js -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Responsive datatable examples -->
     <link href="{{ url_for('static', filename='css/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
 
@@ -63,7 +66,7 @@
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <!-- item-->
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i class="mdi mdi-wallet"></i> Wallet</a>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#register_user"><i class="mdi mdi-wallet"></i> Register User</a>
                                 <a class="dropdown-item d-block" href="#"><span class="badge badge-success float-right">11</span><i class="mdi mdi-settings"></i> Settings</a>
                                 <a class="dropdown-item" href="#"><i class="mdi mdi-lock-open-outline"></i> Lock screen</a>
                                 <div class="dropdown-divider"></div>
@@ -125,7 +128,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ url_for('test2.test') }}" class="waves-effect"><i class="fas fa-chart-line"></i><span> Dashboard </span></a>
+                            <a href="{{ url_for('test2.test') }}" class="waves-effect"><i class="fas fa-chart-line"></i><span> Test Route </span></a>
                         </li>
 
                     </ul>
@@ -178,7 +181,21 @@
         <!-- ============================================================== -->
         <!-- End Right content here -->
         <!-- ============================================================== -->
+        {% include 'Auth/Register_modal.html'%}
 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for categories, message in messages %}
+                <script>
+                    Swal.fire({
+                        title:"{{ categories.title() }}!",
+                        text: "{{ message }}",
+                        icon: "{{ categories }}" == "danger" ? "error" : "{{ categories }}"
+                    })
+                </script>
+                {% endfor %}
+            {% endif%}
+        {% endwith%}
     </div>
     <!-- END wrapper -->
 
@@ -203,6 +220,8 @@
     <script src="{{ url_for('static', filename='js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/responsive.bootstrap4.min.js') }}"></script>
     {% block datatable %} {% endblock %}
+
+    
 </body>
 
 </html>

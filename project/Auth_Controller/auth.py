@@ -10,7 +10,7 @@ auth = Blueprint('auth', __name__)
 def login():
     if (current_user.is_authenticated):
         return redirect(url_for('tcc.testcode'))
-    return render_template('login/login.html', value=current_user.is_authenticated)
+    return render_template('Auth/Login.html', value=current_user.is_authenticated)
 
     
 
@@ -29,11 +29,11 @@ def login_post():
     return redirect(url_for('tcc.testcode'))
 
 
-@auth.route('/signup')
-def signup():
-    if (current_user.is_authenticated):
-        return redirect(url_for('app.testcode'))
-    return render_template('login/register.html')
+# @auth.route('/signup')
+# def signup():
+#     if (current_user.is_authenticated):
+#         return redirect(url_for('tcc.testcode'))
+#     return render_template('Auth/Register.html')
 
 
 @auth.route('/signup', methods=['POST'])
@@ -45,14 +45,16 @@ def signup_post():
     user = User.query.filter_by(email=email).first()
 
     if user:
-        flash('Email address already exists')
-        return redirect(url_for('auth.signup'))
+        flash('Email address already exists', 'error')
+        # return redirect(url_for('auth.signup'))
+    else:
+        new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+        db.session.add(new_user)
+        db.session.commit()
+        flash('Successfully register the user', 'success')
 
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
-    db.session.add(new_user)
-    db.session.commit()
-
-    return redirect(url_for('auth.login'))
+    # return redirect(url_for('auth.login'))
+    return redirect('/')
 
 @auth.route('/logout')
 @login_required
