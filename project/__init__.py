@@ -48,6 +48,8 @@ def create_app():
     from .Controller.Dashboard_Controller.Dashboard_routes import dash as main_blueprint
     app.register_blueprint(main_blueprint)
     
-    
+     # blueprint for dashboard
+    from .Controller.Eod_Controller.Eod_routes import eod as main_blueprint
+    app.register_blueprint(main_blueprint)
 
     return app
