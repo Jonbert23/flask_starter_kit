@@ -4,4 +4,4 @@ test2 = Blueprint('test2', __name__)
 
 @test2.route('/test')
 def test():
-    return "Hello fureks"
+    return "Hello World"

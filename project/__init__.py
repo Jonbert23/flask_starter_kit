@@ -24,6 +24,10 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
 
+    # blueprint for testing
+    from .Test_Route.Test import test2 as test2_blueprint
+    app.register_blueprint(test2_blueprint)
+
     # blueprint for auth routes in our app
     from .Auth_Controller.auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
@@ -44,8 +48,6 @@ def create_app():
     from .Dashboard_Controller.Dashboard_routes import dash as main_blueprint
     app.register_blueprint(main_blueprint)
     
-    # blueprint for dashboard
-    from .Test_Route.Test import test2 as test2_blueprint
-    app.register_blueprint(test2_blueprint)
+    
 
     return app
