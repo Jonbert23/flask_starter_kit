@@ -5,3 +5,7 @@ test2 = Blueprint('test2', __name__)
 @test2.route('/test')
 def test():
     return "Hello World"
+
+@test2.route('/testing')
+def testing():
+    return "Hello World"
