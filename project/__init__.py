@@ -32,7 +32,7 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     # blueprint for testcode
-    from .Testcode_Controller.Testcode_routes import app as test_blueprint
+    from .Testcode_Controller.Testcode_routes import tcc as test_blueprint
     app.register_blueprint(test_blueprint)
 
     # blueprint for calendar
@@ -42,5 +42,9 @@ def create_app():
      # blueprint for dashboard
     from .Dashboard_Controller.Dashboard_routes import dash as main_blueprint
     app.register_blueprint(main_blueprint)
+    
+    # blueprint for dashboard
+    from .Test_Route.Test import test2 as test2_blueprint
+    app.register_blueprint(test2_blueprint)
 
     return app

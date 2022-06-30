@@ -9,7 +9,7 @@ auth = Blueprint('auth', __name__)
 @auth.route('/login')
 def login():
     if (current_user.is_authenticated):
-        return redirect(url_for('app.index'))
+        return redirect(url_for('tcc.testcode'))
     return render_template('login/login.html', value=current_user.is_authenticated)
 
     

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, url_for, request, redirect
 from flask_login import login_required, current_user
-from project.FiguresMatching_Controller import figuresmatchingmain
+from Project.FiguresMatching_Controller import figuresmatchingmain
 from .. import db
 
 app = Blueprint('app', __name__)
