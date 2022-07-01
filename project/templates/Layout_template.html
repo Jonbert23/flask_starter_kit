@@ -8,7 +8,7 @@
     <title>UI Automation</title>
     <meta content="Responsive admin theme build on top of Bootstrap 4" name="description" />
     <meta content="Themesdesign" name="author" />
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/logo.svg') }}">
 
     <!-- DataTables -->
     <link href="{{ url_for('static', filename='css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css">
@@ -39,10 +39,13 @@
             <div class="topbar-left">
                 <a href="#" class="logo">
                     <span class="logo-light">
-                            <i class="mdi mdi-camera-control"></i> UI Automation
+                            <!--<i class="mdi mdi-camera-control"></i>-->
+                            <img src="{{url_for('static', filename='images/logo.svg')}}" alt="user" style="width:20%">
+                             UI Automation
                         </span>
                     <span class="logo-sm">
-                            <i class="mdi mdi-camera-control"></i>
+                            <!--<i class="mdi mdi-camera-control"></i>-->
+                            <img src="{{url_for('static', filename='images/logo.svg')}}" alt="user" style="width:50%">
                         </span>
                 </a>
             </div>
@@ -53,8 +56,7 @@
                     <!-- full screen -->
                     <li class="dropdown notification-list list-inline-item d-none d-md-inline-block">
                         <a class="nav-link waves-effect" href="#" id="btn-fullscreen">
-                            <!-- <i class="mdi mdi-arrow-expand-all noti-icon"></i> -->
-                            <h3>Hello, {{name}}!</h3>
+                            <i class="mdi mdi-arrow-expand-all noti-icon"></i>
                         </a>
                     </li>
 
