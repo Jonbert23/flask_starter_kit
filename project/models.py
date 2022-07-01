@@ -1,5 +1,6 @@
 from flask_login import UserMixin
 from . import db
+from datetime import datetime
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -20,5 +21,8 @@ class TestCodes(UserMixin, db.Model):
     test_date = db.Column(db.String(100))
     test_month = db.Column(db.String(100))
     user_id = db.Column(db.Integer)
+    test_modules = db.Column(db.String (100))
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False)
 
     
