@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                 <form action="#">
+                 <form action="#" method="" enctype="multipart/form-data">
                     
                     <div class="form-group">
                         <label>Client Name</label>
@@ -29,13 +29,13 @@
                                     <div class="col-md-6">
                                         <label>Client Username</label>
                                         <div class="pb-3">
-                                            <input type="text" placeholder="Enter Client Username" class="form-control" required />
+                                            <input type="text" placeholder="Enter Client Username" name="client_username" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label>Client Password</label>
                                         <div class="pb-3">
-                                            <input type="password" placeholder="Enter Client Password" class="form-control" required />
+                                            <input type="password" placeholder="Enter Client Password" name="client_password"  class="form-control" required />
                                         </div>
                                     </div>
                                 </div>
@@ -48,13 +48,13 @@
                                     <div class="col-md-6">
                                         <label>Test Date: From</label>
                                         <div class="pb-3">
-                                            <input type="text" placeholder="Enter Start Date" onfocus="(this.type='date')" class="form-control" required />
+                                            <input type="text" placeholder="Enter Start Date" onfocus="(this.type='date')" name="test_date_from" class="form-control" required />
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label>Test Date: To</label>
                                         <div class="pb-3">
-                                            <input type="text" placeholder="Enter End Date" onfocus="(this.type='date')" class="form-control" required />
+                                            <input type="text" placeholder="Enter End Date" onfocus="(this.type='date')" name="test_date_to" class="form-control" required />
                                         </div>
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                             <legend  class="w-auto" style="font-size:13px; font-weight:bold">Test Date With Month Date Picker</legend>
                             <label>Test Month</label>
                             <div class="pb-3">
-                                <input type="text" placeholder="Enter Month" onfocus="(this.type='month')" class="form-control" required />
+                                <input type="text" placeholder="Enter Month" onfocus="(this.type='month')" name="test_month" class="form-control" required />
                             </div>  
                                 
                         </fieldset>
@@ -73,7 +73,7 @@
                             <legend  class="w-auto" style="font-size:13px; font-weight:bold">Test Date With Single Date Picker</legend>
                             <label>Test Date</label>
                             <div class="pb-3">
-                                <input type="text" placeholder="Enter Date" onfocus="(this.type='date')" class="form-control" required />
+                                <input type="text" placeholder="Enter Date" onfocus="(this.type='date')" name="test_date" class="form-control" required />
                             </div>  
                         </fieldset>
 

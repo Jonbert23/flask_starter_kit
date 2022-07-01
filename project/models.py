@@ -6,6 +6,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
+    role = db.Column(db.String(1000))
 
 class TestCodes(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,5 +19,6 @@ class TestCodes(UserMixin, db.Model):
     test_date_to = db.Column(db.String(100))
     test_date = db.Column(db.String(100))
     test_month = db.Column(db.String(100))
+    user_id = db.Column(db.Integer)
 
     
