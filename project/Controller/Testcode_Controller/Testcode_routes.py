@@ -5,13 +5,17 @@ import random
 import uuid
 from ...models import TestCodes
 from ... import db
+from datetime import datetime
+
 
 tcc = Blueprint('tcc', __name__)
 
 @tcc.route("/")
 @login_required
 def testcode():
-    return render_template('Testcode_Template/Testcode_index.html', name=current_user.name)
+    test_codes = TestCodes.query.all()
+    print(test_codes)
+    return render_template('Testcode_Template/Testcode_index.html', name=current_user.name, test_code=test_codes)
 
 @tcc.route("/add_testcode", methods=['POST'])
 @login_required
@@ -27,6 +31,9 @@ def add_testcode():
         test_date = request.form.get('test_date')
         test_code = uuid.uuid4().hex
         user_id = current_user.id
+        test_modules = "0"
+        created_at = datetime.now()
+        updated_at = datetime.now()
 
         if(test_date_from < test_date_to):
             new_test_code = TestCodes(client_name=client_name, 
@@ -38,7 +45,10 @@ def add_testcode():
                 test_month=test_month,
                 test_date=test_date,
                 test_code=test_code,
-                user_id=user_id)
+                user_id=user_id,
+                test_modules=test_modules,
+                created_at=created_at,
+                updated_at=updated_at,)
 
             db.session.add(new_test_code)
             db.session.commit()

@@ -86,59 +86,21 @@
                         <tr>
                             <th>Test Code</th>
                             <th>Client</th>
-                            <th>Location</th>
                             <th>Test Date</th>
                             <th>Test Module</th>
                             <th>Test Performed Date</th>
                         </tr>
                         </thead>
                         <tbody>
+                            {% for test_code in test_code %}
                             <tr>
-                                <td>4234FDDGDFG7678FGD</td>
-                                <td>Dentive</td>
-                                <td>Benchmark Dental</td>
-                                <td>Junuary 01, 2022 - June 01, 2022</td>
-                                <td>5 out 7</td>
-                                <td>Junuary 01, 2022</td>
-                                
+                                <td>{{test_code['test_code']}}</td>
+                                <td>{{test_code['client_name']}}</td>
+                                <td>{{test_code['test_date_from']}} - {{test_code['test_date_to']}}</td>
+                                <td>{{test_code['test_modules']}} out 7</td>
+                                <td>{{test_code.created_at.strftime("%d %b, %Y")}}</td>
                             </tr>
-                            <tr>
-                                <td>GK34FD545G7678FGD</td>
-                                <td>MB2</td>
-                                <td>Addison</td>
-                                <td>Junuary 01, 2022 - June 01, 2022</td>
-                                <td>7 out 7</td>
-                                <td>Junuary 01, 2022</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>23334FDDGDFG7678FGD</td>
-                                <td>Mint</td>
-                                <td>Bosto Dental</td>
-                                <td>Junuary 01, 2022 - June 01, 2022</td>
-                                <td>4 out 7</td>
-                                <td>Junuary 01, 2022</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>8976FDDGDFG7678FGD</td>
-                                <td>Spring</td>
-                                <td>Colorado</td>
-                                <td>Junuary 01, 2022 - June 01, 2022</td>
-                                <td>7 out 7</td>
-                                <td>Junuary 01, 2022</td>
-                                
-                            </tr>
-                            <tr>
-                                <td>3456FDDGDFG7678FGD</td>
-                                <td>Dentive</td>
-                                <td>Farm dental</td>
-                                <td>Junuary 01, 2022 - June 01, 2022</td>
-                                <td>0 out 7</td>
-                                <td>Junuary 01, 2022</td>
-                                
-                            </tr>
-                            
+                            {% endfor %}
                         </tbody>
                     </table>
 
