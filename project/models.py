@@ -7,7 +7,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     name = db.Column(db.String(1000))
 
-class TestCode(UserMixin, db.Model):
+class TestCodes(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     test_code = db.Column(db.String(100), unique=True)
     client_name = db.Column(db.String(100))
