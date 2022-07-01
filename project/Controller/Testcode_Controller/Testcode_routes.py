@@ -28,8 +28,6 @@ def add_testcode():
         test_code = uuid.uuid4().hex
         user_id = current_user.id
 
-        
-
         if(test_date_from < test_date_to):
             new_test_code = TestCodes(client_name=client_name, 
                 client_link=client_link,
