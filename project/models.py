@@ -9,6 +9,7 @@ class User(UserMixin, db.Model):
 
 class TestCode(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    test_code = db.Column(db.String(100), unique=True)
     client_name = db.Column(db.String(100))
     client_link = db.Column(db.String(100))
     client_username = db.Column(db.String(1000))
