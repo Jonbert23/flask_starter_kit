@@ -30,7 +30,7 @@ def getmetricsXpath(metrics):
 
 
 def breakdownTest(date_from, date_to):
-    
+
     metrics = ["net_prod", "gross_prod", "collection", "adjustment", "newpatient_visit", "existingpatient_visit"]
     metricsXpath = getmetricsXpath(metrics)
 
