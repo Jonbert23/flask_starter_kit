@@ -51,5 +51,8 @@ def create_app():
      # blueprint for dashboard
     from .Controller.Eod_Controller.Eod_routes import eod as main_blueprint
     app.register_blueprint(main_blueprint)
+    
+    from .Controller.Mh_Controller.Mh_routes import mh as main_blueprint
+    app.register_blueprint(main_blueprint)
 
     return app
