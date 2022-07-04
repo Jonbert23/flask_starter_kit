@@ -3,254 +3,33 @@
 {% block header %}  EOD Form {% endblock header%}
 
 {% block test_button %} 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test_modal">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eod_test_modal">
         Run Test
     </button>
 {% endblock test_button %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-xl-12">
-        <div class="card m-b-30">
-            <div class="card-body">  
-                <form class="form-inline">
-                    <div class="form-group">
-                        <label for="test_code">Search Test Result: </label> 
-                        <input type="text" class="form-control ml-4" id="test_code" placeholder="Enter Test Code Here">
-                    </div>
-                    <button type="submit" class="btn btn-primary ml-2">Search</button>
-                    
-                </form>
-            </div>
-        </div>
-    </div> <!-- end col -->
-    </div> 
-
-    <div class="row">
-        <div class="col-xl-6 align-items-stretch">
-            <div class="card m-b-30">
-                <div class="card-body">
-                    <h4 class="mt-0 header-title">Test Information</h4>
-                    <hr>
-                    <p class="text-muted mt-2 mb-0 text-uppercase">Client   :<span class="ml-4 text-capitalize">Dentive</span></p>
-                    <p class="text-muted mt-2 mb-0 text-uppercase">location   :<span class="ml-4 text-capitalize">benchmark dental</span></p>
-                    <p class="text-muted mt-2 mb-0 text-uppercase">date   :<span class="ml-4 text-capitalize">junuary 01, 2022 - june 01, 2022</span></p>
-                    <p class="text-muted mt-2 mb-0 text-uppercase">test code   :<span class="ml-4">4234fddgdfg7678fgd</span></p>
-                    
-                </div>
-            </div>
-        </div> 
-        <div class="col-xl-3 align-items-stretch">
-            <div class="card">
-                <div class="card-heading p-4">
-                    <div class="mini-stat-icon float-right">
-                        <i class="mdi mdi-cube-outline bg-primary  text-white"></i>
-                    </div>
-                    <div>
-                        <h5 class="font-16">Performed Test</h5>
-                    </div>
-                    <h3 class="mt-4">5 Test</h3>
-                    <hr>
-                    <p class="text-muted mt-2 mb-0 pb-2">Total Test :<span> 7 </span></p>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 align-items-stretch">
-            <div class="card">
-                <div class="card-heading p-4">
-                    <div class="mini-stat-icon float-right">
-                        <i class="mdi mdi-briefcase-check bg-success text-white"></i>
-                    </div>
-                    <div>
-                        <h5 class="font-16">Total Revenue</h5>
-                    </div>
-                    <h3 class="mt-4">$73,265</h3>
-                    <hr>
-                    <p class="text-muted mt-2 mb-0 pb-2">Previous period<span class="float-right">88%</span></p>
-                </div>
-            </div>
-        </div>
     
-    </div>
+    <!--Search Section-->
+    {% include "Eod_Template/Sections/Search_section.html" %}
 
-    <div class="row">
-        <div class="col-xl-12">
-            <div class="card m-b-30">
-                <div class="card-body">
-                    <h4 class="mt-0 header-title">Breakdown Test</h4>
-                    <hr>
-                    <!--Graph column------------------------------------------------>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="row">
-                                <!--Firts Grapd------------------------------------------------>
-                                <div class="col-md-12">
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="p-3"style="height: 300px">
-                                            <canvas id="brk_chart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Second Grapd------------------------------------------------>
-                                <div class="col-md-12">
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="p-3"style="height: 300px">
-                                            <canvas id="brk_chart2"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!--Cards of metric column------------------------------------------------>
-                        <div class="col-md-4">
+    <!--Info Section-->
+    {% include "Eod_Template/Sections/Info_section.html" %}
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Doctor</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_doctor_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
+    <!--Graph Section-->
+    {% include "Eod_Template/Sections/Graph_test_section.html" %}
 
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Endo</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_endo_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
+    <!--Breakdown Section-->
+    {% include "Eod_Template/Sections/Breakdown_test_section.html" %}
 
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Endo</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_endo_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Hygiene</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_hyg_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Invisalign</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_invisalign_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                </div><!-- end col -->
-
-                                <div class="col-md-6">
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Oral Surgery</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_os_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Oral Surgery</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_os_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Oral Surgery</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_os_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Ortho</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_ortho_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="box-shadow: 1px 1px 4px #000000;">
-                                        <div class="card-heading p-1 pl-4 pr-3">
-                                            <div>
-                                                <h5 class="font-16 one-line-text">Pedo</h5>
-                                            </div>
-                                            <hr>
-                                            <p class="text-muted mt-2 mb-0 pb-2">Test Result :<span> FAIL </span> 
-                                                <span class="float-right">
-                                                <a href="#" data-toggle="modal" data-target="#lob_pedo_modal"><i class="fas fa-external-link-alt"></i></a> 
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div><!-- end col -->
-                            </div><!-- end row -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end col -->
-    </div>
+    <!--Mail Section-->
+    {% include "Eod_Template/Sections/Mail_test_section.html" %}
+    
+    <!--Test Modal-->
+    {% include "Eod_Template/Modal/Eod_modal.html" %}
 
 {% endblock content %}
+
+{% block chart %}
+    <script src="{{ url_for('static', filename='charts/eod_form_chart.js') }}"></script>
+{% endblock chart %}
