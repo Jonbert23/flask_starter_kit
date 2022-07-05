@@ -20,13 +20,13 @@ app = Blueprint('app', __name__)
 #     return render_template('Dashboard_Template/Dashboard_index.html')
 
 
-# from project.Testcode_Controller.Testcode_routes import Testcode_routes
-# from project.Calendar_Controller.Calendar_routes import Calendar_routes
-# from project.Dashboard_Controller.Dashboard_routes import Dashboard_routes
+# from Project.Testcode_Controller.Testcode_routes import Testcode_routes
+# from Project.Calendar_Controller.Calendar_routes import Calendar_routes
+# from Project.Dashboard_Controller.Dashboard_routes import Dashboard_routes
 
-# import project.Testcode_Controller.Testcode_routes
-# import project.Calendar_Controller.Calendar_routes
-# import project.Dashboard_Controller.Dashboard_routes
+# import Project.Testcode_Controller.Testcode_routes
+# import Project.Calendar_Controller.Calendar_routes
+# import Project.Dashboard_Controller.Dashboard_routes
 
 # @app.route('/')
 # @login_required
