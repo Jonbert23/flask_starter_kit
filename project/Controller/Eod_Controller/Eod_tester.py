@@ -1,7 +1,8 @@
 from Project.Controller.Global_Controller.Global_test import Login
-from .Eod_xpath import EodXpath, BreakdownXpath
+from .Eod_xpath import EodXpath, BreakdownXpath, EodSetupXpath
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 def testEod(testcode):
     # INSERT CODE FOR DECODING THE TESTCODE
@@ -11,6 +12,10 @@ def testEod(testcode):
     if not driver:
         return False
     try:
+        date_picker = WebDriverWait(driver, 60).until(
+            EC.element_to_be_clickable((By.XPATH, EodSetupXpath.date_picker))
+        )
+
         xpaths = getXpath()
 
         result = {}

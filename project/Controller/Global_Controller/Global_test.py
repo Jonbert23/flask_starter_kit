@@ -15,7 +15,7 @@ class Login:
         d['loggingPrefs'] = {'browser': 'ERROR'}
 
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), desired_capabilities=d)
-        driver.implicitly_wait(30)
+        # driver.implicitly_wait(30)
 
         res = Login.openUrl(driver, url)
 
@@ -57,18 +57,27 @@ class Login:
             # element = WebDriverWait(driver, 120).until(
             #     EC.presence_of_element_located((By.XPATH, LoginXpath.login_error))
             # )
-            element = driver.find_element(
-                by = By.XPATH,
-                value = LoginXpath.main_header
+            element = WebDriverWait(driver, 120).until(
+                EC.any_of(
+                    EC.presence_of_element_located((By.XPATH, LoginXpath.login_error)), 
+                    EC.presence_of_element_located((By.XPATH, LoginXpath.main_header))
+                )
             )
+            # element = driver.find_element(
+            #     by = By.XPATH,
+            #     value = LoginXpath.main_header
+            # )
+            # print(f"{element} {element.text}")
             print("Login success")
+
+            if "These credentials do not match our records" in element.text:
+                return {
+                    "success": False,
+                    "message": "Invalid credentials."
+                }
             
         except Exception as e:
-            print("Invalid Credentials")
-            return {
-                "success": False,
-                "message": "Invalid credentials."
-            }
+            print(e)
         return{
             "success": True
         }
@@ -101,10 +110,13 @@ class Login:
             # element = WebDriverWait(driver, 120).until(
             #     EC.presence_of_element_located((By.XPATH, LoginXpath.logo_xpath))
             # )
-            element = driver.find_element(
-                by = By.XPATH,
-                value = LoginXpath.logo_xpath
+            element = WebDriverWait(driver, 120).until(
+                EC.presence_of_element_located((By.XPATH, LoginXpath.logo_xpath))
             )
+            # element = driver.find_element(
+            #     by = By.XPATH,
+            #     value = LoginXpath.logo_xpath
+            # )
             print(f"Valid URL {element}")
         except Exception as e:
             print("Invalid Url")
