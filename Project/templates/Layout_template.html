@@ -119,7 +119,7 @@
                             <a href="#" class="waves-effect"><i class="fab fa-megaport"></i><span> Front Office </span></a>
                         </li>
                         <li>
-                            <a href="#" class="waves-effect"><i class="fas fa-cloud-sun"></i><span> Morning Huddle </span></a>
+                            <a href="{{ url_for('mh.morning_huddle') }}" class="waves-effect"><i class="fas fa-cloud-sun"></i><span> Morning Huddle </span></a>
                         </li>
                         <li>
                             <a href="#" class="waves-effect"><i class="fas fa-users-cog"></i><span> Patient Portal </span></a>
@@ -222,6 +222,8 @@
     <script src="{{ url_for('static', filename='js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/responsive.bootstrap4.min.js') }}"></script>
     {% block datatable %} {% endblock %}
+
+    {% block scripts %} {% endblock %}
 
     
 </body>
