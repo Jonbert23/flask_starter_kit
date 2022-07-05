@@ -4,34 +4,30 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-def testEod(testcode):
-    # INSERT CODE FOR DECODING THE TESTCODE
+def testEod(driver):
+    result = {}
 
-    driver = Login.login("https://solo.next.jarvisanalytics.com/end-of-day")
-
-    if not driver:
-        return False
     try:
         date_picker = WebDriverWait(driver, 60).until(
-            EC.element_to_be_clickable((By.XPATH, EodSetupXpath.date_picker))
+            EC.presence_of_element_located((By.XPATH, EodSetupXpath.date_picker))
         )
 
         xpaths = getXpath()
 
-        result = {}
         for metric in xpaths:
             # print(xpaths[metric]["main"])
 
+            result[metric] = {}
             result[metric]["main"] = driver.find_element(
                 by = By.XPATH,
                 value = xpaths[metric]["main"]
-            ).text
+            ).get_attribute("value")
         
-        print(result)
     except Exception as e:
-        print(e)
+        print(f"Some error in here {e}")
     finally:
         driver.quit()
+        return result
 
 def getXpath():
     return {

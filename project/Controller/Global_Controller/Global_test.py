@@ -1,8 +1,4 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from .Global_xpath import LoginXpath
@@ -10,11 +6,8 @@ from flask import flash
 
 class Login:
     @staticmethod
-    def login(url):
-        d = DesiredCapabilities.CHROME
-        d['loggingPrefs'] = {'browser': 'ERROR'}
-
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), desired_capabilities=d)
+    def login(driver, url, username, password):
+        # driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), desired_capabilities=d)
         # driver.implicitly_wait(30)
 
         res = Login.openUrl(driver, url)
@@ -25,13 +18,13 @@ class Login:
             return False
 
 
-        username = LoginXpath.username
-        password = LoginXpath.password
-        loginbtn = LoginXpath.login_btn
+        username_xpath = LoginXpath.username
+        password_xpath = LoginXpath.password
+        loginbtn_xpath = LoginXpath.login_btn
 
         # landing page
         
-        res = Login.authenticate(driver, username, password, loginbtn)
+        res = Login.authenticate(driver, username_xpath, password_xpath, loginbtn_xpath, username, password)
         
         if not res['success']:
             flash(res["message"], category="error")
@@ -41,15 +34,15 @@ class Login:
         return driver
 
     @staticmethod
-    def authenticate(driver, username, password, loginbtn):
+    def authenticate(driver, username_xpath, password_xpath, loginbtn_xpath, username, passwd):
         # email = WebDriverWait(driver, 120).until(
         #     EC.presence_of_element_located((By.XPATH, f"{username}"))
         # )
-        email = driver.find_element(by=By.XPATH, value=f'{username}')
-        email.send_keys("testryan")
-        password = driver.find_element(by=By.XPATH, value=f'{password}')
-        password.send_keys("Jarvis.123")
-        loginbtn = driver.find_element(by=By.XPATH, value=f'{loginbtn}')
+        email = driver.find_element(by=By.XPATH, value=f'{username_xpath}')
+        email.send_keys(username)
+        password = driver.find_element(by=By.XPATH, value=f'{password_xpath}')
+        password.send_keys(passwd)
+        loginbtn = driver.find_element(by=By.XPATH, value=f'{loginbtn_xpath}')
 
         loginbtn.click()
 
