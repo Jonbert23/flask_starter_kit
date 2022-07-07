@@ -8,12 +8,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                 <form action="#">
+                 <form action="{{ url_for('cal.runCalendar') }}" method="POST" enctype="multipart/form-data">
                     
                     <div class="form-group">
-                        <label>Test Code</label>
+                        <label>Test Code </label>
                         <div>
-                            <input type="text" class="form-control" required placeholder="Enter The Test Code"/>
+                            <input type="text" class="form-control" name="test_code" required placeholder="Enter The Test Code"/>
                         </div>
                     </div>
 
@@ -21,17 +21,17 @@
                         <label>Default Test</label>
                         <div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck1" data-parsley-multiple="groups"
+                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck1" name="default_test[]" data-parsley-multiple="groups"
                                         data-parsley-mincheck="2">
                                 <label class="custom-control-label" for="customCheck1">Metric Test: Per Month</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck2" data-parsley-multiple="groups"
+                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck2" name="default_test[]" data-parsley-multiple="groups"
                                         data-parsley-mincheck="2">
                                 <label class="custom-control-label" for="customCheck2">Appointment Validation</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck3" data-parsley-multiple="groups"
+                                <input type="checkbox" checked disabled class="custom-control-input" id="customCheck3" name="default_test[]" data-parsley-multiple="groups"
                                         data-parsley-mincheck="2">
                                 <label class="custom-control-label" for="customCheck3">Appointment Validation: Per Day</label>
                             </div>
@@ -40,20 +40,23 @@
                         <hr>
                         <label>Optional Test</label>
                         <div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck4" data-parsley-multiple="groups"
-                                        data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck4">Provider Filter Test</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="optional_test[]" value="Provider Filter Test" id="provider_filter">
+                                <label class="form-check-label" for="provider_filter">
+                                    Provider Filter Test
+                                </label>
                             </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck5" data-parsley-multiple="groups"
-                                        data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck5">Procedure Filter test</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="optional_test[]" value="Procedure Filter Test" id="procedure_filter">
+                                <label class="form-check-label" for="procedure_filter">
+                                    Procedure Filter Test
+                                </label>
                             </div>
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck6" data-parsley-multiple="groups"
-                                        data-parsley-mincheck="2">
-                                <label class="custom-control-label" for="customCheck6">patient Filter Test</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="optional_test[]" value="Patient Filter Test" id="patient_filter" >
+                                <label class="form-check-label" for="patient_filter">
+                                    Patient Filter Test
+                                </label>
                             </div>
                             
                         </div>
