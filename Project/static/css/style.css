@@ -3633,3 +3633,36 @@ table.focus-on tbody tr.focused td {
   padding-left: 20px;
 }
 /*# sourceMappingURL=style.css.map */
+#preloader{
+  background: #000000 url(images/preloader.gif);
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 1000;
+  opacity: .9;
+  margin: auto;
+}
+
+#preloader-text{
+  position: relative;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-size: 80px;
+  letter-spacing: 4px;
+  overflow: hidden;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 500%;
+  }
+}

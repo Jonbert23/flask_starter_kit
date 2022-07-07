@@ -27,7 +27,13 @@
 
 </head>
 
-<body>
+<body><!-- Preloader -->
+    <div id="preloader">
+        <div class="text-center">
+            <img src="{{url_for('static', filename='images/preloader.gif')}}">
+            <p id="preloader-text">Running Automated Test</p>
+        </div>
+    </div>
 
     <!-- Begin page -->
     <div id="wrapper">
@@ -126,7 +132,7 @@
                         </li>
                         
                         <li>
-                            <a href="#" class="waves-effect"><i class="fas fa-file-medical-alt"></i><span> Tx Miner </span></a>
+                            <a href="{{ url_for('tx.txMiner') }}" class="waves-effect"><i class="fas fa-file-medical-alt  "></i><span> Tx Miner </span></a>
                         </li>
 
                         <li>
@@ -224,6 +230,15 @@
     {% block datatable %} {% endblock %}
 
     {% block scripts %} {% endblock %}
+    <script>
+        document.getElementById("preloader").hidden=true;
+
+        function loader(){
+            $(document).ready(function(){
+                $("#preloader").fadeOut()
+            });
+        }
+    </script>
 
     
 </body>
