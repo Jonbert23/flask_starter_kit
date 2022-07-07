@@ -62,7 +62,7 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-project/db.sqlite 
+Project/db.sqlite
 
 # Flask stuff:
 instance/
@@ -107,12 +107,12 @@ ipython_config.py
 # pdm
 #   Similar to Pipfile.lock, it is generally recommended to include pdm.lock in version control.
 #pdm.lock
-#   pdm stores project-wide configurations in .pdm.toml, but it is recommended to not include it
+#   pdm stores Project-wide configurations in .pdm.toml, but it is recommended to not include it
 #   in version control.
 #   https://pdm.fming.dev/#use-with-ide
 .pdm.toml
 
-# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-Project/pdm
 __pypackages__/
 
 # Celery stuff
@@ -131,11 +131,11 @@ ENV/
 env.bak/
 venv.bak/
 
-# Spyder project settings
+# Spyder Project settings
 .spyderproject
 .spyproject
 
-# Rope project settings
+# Rope Project settings
 .ropeproject
 
 # mkdocs documentation
