@@ -1,3 +1,4 @@
+// FIX
 (function tx_provider_filter_chart()
 {
     const sample = document.getElementById('tx_provider_filter_chart');

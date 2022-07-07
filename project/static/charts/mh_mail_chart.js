@@ -1,3 +1,4 @@
+// FIX
 (function ytd_mail_chart()
 {
     const sample = document.getElementById('ytd_mail_chart');

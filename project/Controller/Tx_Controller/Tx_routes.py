@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 
 tx = Blueprint('tx', __name__)
 
+
+##FIX
 @tx.route("/tx-miner")
 @login_required
 def txMiner():

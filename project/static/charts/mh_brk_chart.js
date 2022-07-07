@@ -1,3 +1,5 @@
+// FIX
+
 (function ytd_breakdown_chart()
 {
     const sample = document.getElementById('ytd_breakdown_chart');

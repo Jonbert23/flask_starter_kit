@@ -1,3 +1,4 @@
+// FIX
 (function brk_chart(){
     const ctx = document.getElementById('scorecard_chart');
     const metric_chart = new Chart(ctx, {

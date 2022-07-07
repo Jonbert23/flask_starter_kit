@@ -1,3 +1,4 @@
+// FIX
 (function defaultDisplay() 
 {
     document.getElementById("mail").hidden = true;
