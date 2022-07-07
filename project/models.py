@@ -25,23 +25,4 @@ class TestCodes(UserMixin, db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
     updated_at = db.Column(db.DateTime, nullable=False)
 
-class CalendarFilterUse(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer)
-    test_code = db.Column(db.String(100))
-    filter_name = db.Column(db.String(100))
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    updated_at = db.Column(db.DateTime, nullable=False)
-
-class CalendarFilterTesting(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer)
-    filter_id = db.Column(db.Integer)
-    test_code = db.Column(db.String(100))
-    search_provider = db.Column(db.String(100))
-    patient_name = db.Column(db.String(100))
-    procedure_code = db.Column(db.String(100))
-    unsearch_provider = db.Column(db.String(100))
-    status = db.Column(db.String(100))
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
-    updated_at = db.Column(db.DateTime, nullable=False)
+    
