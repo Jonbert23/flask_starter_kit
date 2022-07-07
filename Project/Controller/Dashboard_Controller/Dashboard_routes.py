@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, url_for, request, redirect
 from flask_login import login_required, current_user
-from .Dashboard_xpath import BreakdownXpath
+from .Dashboard_xpath import BreakdownXpath, GlobalXpath, ProductionTest, ServiceTest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -10,7 +10,9 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.chrome.service import Service
 from selenium import webdriver
 from Project.Controller.Global_Controller.Global_test import Login
-
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+from Project.Controller.Global_Controller.Global_test import calendarDateRange
 
 # --Blueprint
 dash = Blueprint('dash', __name__)
@@ -22,96 +24,157 @@ def dashboard():
         d = DesiredCapabilities.CHROME
         d['loggingPrefs'] = {'browser': 'ERROR'}
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), desired_capabilities=d)
-        Login.login(driver, "https://solo.next.jarvisanalytics.com/end-of-day", "testryan", "Jarvis.123")
+        Login.login(driver, "https://solo.next.jarvisanalytics.com/solo/results", "testryan", "Jarvis.123")
 
         if not driver:
             return False
 
-        date_from = "2022-07-01"
-        date_to = "2022-07-31"
-        breakdownTest(driver, date_from, date_to)
+        date_from = "2022-06-01"
+        date_to = "2022-06-30"
+        test_result = automationTest(driver, date_from, date_to)
+        print(test_result)
+
+        return render_template('Dashboard_Template/Dashboard_index.html', test_result=test_result)
 
     return render_template('Dashboard_Template/Dashboard_index.html')
 
 
-def getmetricsXpath(metrics):
-    metric = {}
+def automationTest(driver, date_from, date_to):
+    #Calendar Date Range
+    calendarDateRange(driver, date_from, date_to)
 
-    for x in metrics:
-        metric[x] = BreakdownXpath.financial_dataxpath[x]
+    # Update Button
+    update_btn = WebDriverWait(driver, 120).until(
+            EC.visibility_of_element_located((By.XPATH, f"{GlobalXpath.update_btn}")))
+    update_btn.click()
 
-    return metric
+    # Testing
+    breakdown_test = breakdownTest(driver)
+    production_test = productionTest(driver)
+    service_test = serviceTest(driver)
 
-# Select Date-Range in Calendar
-def dateFrom(driver):
-    pass
-
-def dateTo(driver):
-    pass
-
-def setdateCalendar(driver, date_from, date_to):
-    yf, mf, df = date_from.split('-')
-
-    yt, mt, dt = date_to.split('-')
-
-    print("----Calendar Date----")
-
-    # Open Calendar Date Picker
     time.sleep(5)
-    dateElement = WebDriverWait(driver, 1000).until(EC.presence_of_element_located((By.XPATH, f"{BreakdownXpath.date_picker}")))
-    dateElement.click()
+    allTest = [breakdown_test, production_test, service_test]
 
-    # From Date Next and Previous
-    prevMonthFrom = driver.find_element(
-        by=By.XPATH,
-        value=f"{BreakdownXpath.prev_monthfrom}"
-    )
-    nextMonthFrom = driver.find_element(
-        by=By.XPATH,
-        value=f"{BreakdownXpath.next_monthfrom}"
-    )
+    return allTest
 
-    prevMonthFrom = driver.find_element(
-        by=By.XPATH,
-        value=f"{BreakdownXpath.prev_monthfrom}"
-    )
-    nextMonthFrom = driver.find_element(
-        by=By.XPATH,
-        value=f"{BreakdownXpath.next_monthfrom}"
-    )
+def getmetricsXpath(metrics, test):
+    metric = {}
+    if test == "brkTest":
+        for x in metrics:
+            metric[x] = BreakdownXpath.financial_dataxpath[x]
 
+        return metric
 
-    month = WebDriverWait(driver, 1000).until(
-        EC.visibility_of_element_located((By.XPATH, f"{BreakdownXpath.curr_monthfrom}"))
-    )
-    date_month = month.text
+    if test == "prodTest":
+        print(test)
+        for x in metrics:
+            metric[x] = ProductionTest.production_testxpath[x]
 
-    year = WebDriverWait(driver, 1000).until(
-        EC.visibility_of_element_located((By.XPATH, f"{BreakdownXpath.curr_yearfrom}"))
-    )
-    date_year = year.text
+        return metric
 
-    if yf == yt and mf == mt:
-        pass
-
-    else:
-        dateFrom(driver)
-        dateTo(driver)
-
-def breakdownTest(driver, date_from, date_to):
-    setdateCalendar(driver, date_from, date_to)
-
+def breakdownTest(driver):
     metrics = ["net_prod", "gross_prod", "collection", "adjustment", "newpatient_visit", "existingpatient_visit"]
-    metricsXpath = getmetricsXpath(metrics)
+    metricsXpath = getmetricsXpath(metrics, "brkTest")
+    values = {}
 
     if metrics:
         for metric in metricsXpath:
+            values[metric] = []
             metric_base = metricsXpath[metric][0]
             metric_brk = metricsXpath[metric][1]
             metric_brktotal = metricsXpath[metric][2]
             metric_brkclose = metricsXpath[metric][3]
 
-            print(f"------->{metric_base}")
-            print(f">{metric_brk}")
-            print(f">{metric_brktotal}")
-            print(f">{metric_brkclose}")
+            values[metric].append(WebDriverWait(driver, 120).until(
+                EC.visibility_of_element_located((By.XPATH, f"{metric_base}"))).text.replace('$ ','').replace('(', '-').replace(')',''))
+            breakdownbtn = driver.find_element(by=By.XPATH, value=f'{metric_brk}')
+            breakdownbtn.click()
+            values[metric].append(WebDriverWait(driver, 120).until(
+                EC.visibility_of_element_located((By.XPATH, f"{metric_brktotal}"))).text.replace('$ ','').replace('(', '-').replace(')',''))
+            breakdownCloseBtn = driver.find_element(by=By.XPATH, value=f'{metric_brkclose}')
+            breakdownCloseBtn.click()
+
+
+            status = testValue(values[metric])
+            values[metric].append(status)
+
+    return values
+
+def productionTest(driver):
+    metrics = ["providers_data", "table_total", "payor_score"]
+    metricsXpath = getmetricsXpath(metrics, "prodTest")
+    values = {}
+
+    if metrics:
+        net_prod = WebDriverWait(driver, 120).until(
+            EC.visibility_of_element_located((By.XPATH, f"{ProductionTest.netprod_base}"))).text.replace('$ ','').replace('(', '-').replace(')','')
+
+        for metric in metricsXpath:
+            values[metric] = []
+            metric_base = metricsXpath[metric][0]
+            if metric != "payor_score":
+                print("---not payor score")
+                values[metric].append(WebDriverWait(driver, 120).until(
+                    EC.visibility_of_element_located((By.XPATH, f"{metric_base}"))).text.replace('$ ','').replace('(', '-').replace(')',''))
+                values[metric].append(net_prod)
+            else:
+                print("---payor score")
+                metric_view = WebDriverWait(driver, 120).until(
+                        EC.visibility_of_element_located((By.XPATH, f"{GlobalXpath.metric_view}")))
+                actions = ActionChains(driver)
+                actions.move_to_element(metric_view).click().perform()
+
+                values[metric].append(WebDriverWait(driver, 120).until(
+                    EC.visibility_of_element_located((By.XPATH, f"{metric_base}"))).text.replace('$ ','').replace('(', '-').replace(')',''))
+                values[metric].append(net_prod)
+
+            status = testValue(values[metric])
+            values[metric].append(status)
+
+    return values
+
+def testValue(values):
+    if values[0] != values[1]:
+        status = "Fail"
+
+    if values[0] == values[1]:
+        status = "Pass"
+
+    return status
+
+def serviceTest(driver):
+    stopper = driver.find_element(By.XPATH, "/html/body/div[1]/main/div[2]/section[4]/div/div[2]/div/div/table/tbody/tr[1]").text
+    values={}
+    service_code = driver.find_elements(By.XPATH, f"{ServiceTest.service_code}")
+    for count, codes in enumerate(service_code):
+        code = codes.text
+        if count < 11:
+           values[code] = []
+        else:
+            break
+
+    for value_code in values:
+        search_input = WebDriverWait(driver, 120).until(
+            EC.visibility_of_element_located((By.XPATH, f"{ServiceTest.search_input}"))
+        )
+        # Select all Search
+        search_input.send_keys(Keys.CONTROL + "a")
+        # Clear Search
+        search_input.send_keys(Keys.DELETE)
+        # Search Service Code
+        search_input.send_keys(value_code)
+        # Enter Search
+        search_input.send_keys(Keys.ENTER)
+        print(stopper)
+
+        search_code = driver.find_elements(By.XPATH, f"{ServiceTest.service_code}")
+        for codes in search_code:
+            if code in values[code]:
+                code = codes.text
+                print(f"{code}")
+
+    print(values)
+
+
+

@@ -1,19 +1,9 @@
 
-class BreakdownXpath():
-    # --Calendar Date Range
-    date_picker = '//*[@class="vue-daterange-picker"]'
-    prev_monthfrom = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[1]"
-    next_monthfrom = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[3]"
-    curr_monthfrom = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[2]/div/select"
-    curr_yearfrom = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[1]/div/table/thead/tr/th[2]/div/input"
-    prev_monthto = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[1]"
-    next_monthto = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[3]"
-    curr_monthto = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[2]/div/select"
-    curr_yearto = "/html/body/div[1]/main/div[1]/div/div/div/div[1]/div/div[2]/div/div[2]/div[2]/div/table/thead/tr/th[2]/div/input"
-
+class GlobalXpath():
     update_btn = "/html/body/div[1]/main/div[1]/div/div/div/div[4]/button"
+    metric_view = "/html/body/div[1]/main/div[1]/div/nav/ul/li[2]/a"
 
-    # --Financial Data
+class BreakdownXpath():
 
     # Net production
     netprod_base = "/html/body/div[1]/main/div[2]/section[1]/div[1]/div[1]/div/div/div[2]/h3"
@@ -53,7 +43,6 @@ class BreakdownXpath():
     evs_brktotal = "/html/body/div[1]/main/div[2]/section[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/div/div[2]/div[2]/table/tr/td[5]/span"
     evs_brkclose = "/html/body/div[1]/main/div[2]/section[2]/div/div[1]/div/div[2]/div/div/div[3]/div/div/div/div[1]/button"
 
-    # all dictionary xpath
     financial_dataxpath = {"net_prod": [netprod_base, netprod_brk, netprod_brktotal, netprod_brkclose],
                            "gross_prod": [grossprod_base, grossprod_brk, grossprod_brktotal, grossprod_brkclose],
                            "adjustment": [adjustment_base, adjustment_brk, adjustment_brktotal, adjustment_brkclose],
@@ -61,3 +50,20 @@ class BreakdownXpath():
                            "newpatient_visit": [nvs_base, nvs_brk, nvs_brktotal, nvs_brkclose],
                            "existingpatient_visit": [evs_base, evs_brk, evs_brktotal, evs_brkclose]
     }
+
+class ProductionTest():
+    netprod_base = "/html/body/div[1]/main/div[2]/section[1]/div[1]/div[1]/div/div/div[2]/h3"
+    providers_data = "/html/body/div[1]/main/div[2]/section[3]/div[1]/div/div[2]/div[1]/h3"
+    table_total = "/html/body/div[1]/main/div[2]/section[3]/div[2]/div/div[2]/div/table/tr[2]/td[3]/strong"
+    payor_score = "/html/body/div[1]/main/div[2]/section[3]/div/div[2]/div/div/table/tr/td[2]/strong"
+
+    production_testxpath = {
+                            "providers_data": [providers_data],
+                            "table_total": [table_total],
+                            "payor_score": [payor_score]
+    }
+
+class ServiceTest():
+    service_code = "/html/body/div[1]/main/div[2]/section[4]/div/div[2]/div/div/table/tbody/tr/td[3]"
+    search_input = "/html/body/div[1]/main/div[2]/section[4]/div/div[1]/div[2]/div[1]/input"
+    search_code = "/html/body/div[1]/main/div[2]/section[4]/div/div[2]/div/div/table/tbody/tr/td[3]"
