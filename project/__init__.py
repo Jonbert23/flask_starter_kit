@@ -54,5 +54,8 @@ def create_app():
     
     from .Controller.Mh_Controller.Mh_routes import mh as main_blueprint
     app.register_blueprint(main_blueprint)
+    
+    from .Controller.Tx_Controller.Tx_routes import tx as main_blueprint
+    app.register_blueprint(main_blueprint)
 
     return app
