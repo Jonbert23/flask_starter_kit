@@ -29,15 +29,15 @@ def login_post():
     return redirect(url_for('tcc.testcode'))
 
 
-# @auth.route('/signup')
-# def signup():
-#     if (current_user.is_authenticated):
-#         return redirect(url_for('tcc.testcode'))
-#     return render_template('Auth/Register.html')
+@auth.route('/signup')
+def signup():
+    if (current_user.is_authenticated):
+        return redirect(url_for('tcc.testcode'))
+    return render_template('Auth/Register.html')
 
 
 @auth.route('/signup', methods=['POST','GET'])
-@login_required
+# @login_required
 def signup_post():
     if request.method == 'POST':
         email = request.form.get('email')
